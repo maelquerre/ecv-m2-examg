@@ -25,8 +25,9 @@ export function Card({ picture }) {
     [picture]
   );
 
+  // TODO: Update this to return the accurate value
   const isBookmarked = useMemo(
-    () => picture.likedBy && picture.likedBy.find(({ _id }) => _id === state.user._id),
+    () => false,
     [picture]
   );
 
