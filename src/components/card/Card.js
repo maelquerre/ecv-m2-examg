@@ -29,7 +29,7 @@ export function Card({ picture }) {
   );
 
   const isBookmarked = useMemo(
-    () => state.user?.pictures_collection?.find(({ picsum_id }) => picsum_id === picture.picsum_id),
+    () => state.user?.pictures_collection.find(({ picsum_id }) => picsum_id === picture.picsum_id),
     [state.user]
   );
 
