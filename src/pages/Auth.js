@@ -33,8 +33,11 @@ export default function Login() {
   if (state.isLoggedIn) return <Redirect to="/" />;
   return (
     <div className="auth">
-      <h1>Cocktail app !</h1>
-      <form>
+      <h1>Photo App</h1>
+
+      <form className="auth-form">
+        {displayRegisterFrom ? <h2>Create your account</h2> : <h2>Log in</h2>}
+
         {state.error && <p className="error">{state.error.message}</p>}
         {displayRegisterFrom ?
           <>
@@ -42,18 +45,30 @@ export default function Login() {
             <input name="email" type="email" placeholder="Email" onChange={onChange} />
             <input name="password" type="password" placeholder="Password" onChange={onChange} />
             <button onClick={register}>Register</button>
-            <p>Have an account?</p>
-            <p className="no-margin-top">
-              <span className="link" onClick={() => setDisplayRegisterForm(!displayRegisterFrom)}>Login</span></p>
+            <p>
+              Have an account?&nbsp;
+
+              <span
+                className="link"
+                onClick={() => setDisplayRegisterForm(!displayRegisterFrom)}
+              >
+                Log in
+              </span>.
+            </p>
           </>
           :
           <>
             <input name="email" type="email" placeholder="Email" onChange={onChange} />
             <input name="password" type="password" placeholder="Password" onChange={onChange} />
-            <button onClick={login}>Connexion</button>
-            <p>Don't have an account?</p>
-            <p className="no-margin-top">
-              <span className="link" onClick={() => setDisplayRegisterForm(!displayRegisterFrom)}>Create your account</span>
+            <button onClick={login}>Log in</button>
+
+            <p>
+              Don't have an account?&nbsp;
+
+              <span
+                className="link"
+                onClick={() => setDisplayRegisterForm(!displayRegisterFrom)}
+              >Create an account</span>.
             </p>
           </>
         }
