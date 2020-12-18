@@ -26,6 +26,16 @@ export default function reducer(state, action) {
         pictures: [...pictures]
       };
 
+    case types.PICTURE_BOOKMARKED:
+      const { user } = state;
+      user.pictures_collection = { ...action.payload.user.pictures_collection };
+
+      return {
+        ...state,
+        pending: false,
+        user
+      };
+
     case types.PICTURE_FAILED:
       return {
         ...state,

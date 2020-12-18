@@ -10,9 +10,9 @@ import {
 
 export const types = {
   PICTURE_STARTED: 'PICTURE_STARTED',
-  PICTURE_COMMENTED: 'PICTURE_COMMENTED',
   PICTURE_DONE: 'PICTURE_DONE',
   PICTURE_LIKED: 'PICTURE_LIKED',
+  PICTURE_BOOKMARKED: 'PICTURE_BOOKMARKED',
   PICTURE_FAILED: 'PICTURE_FAILED'
 };
 
@@ -54,14 +54,14 @@ export function commentPictureById(dispatch, { pictureId, data }) {
 export function addPictureByIdToCollection(dispatch, pictureId) {
   dispatch(_started());
   addPictureToCollection(pictureId)
-    .then(picture => dispatch(_onLiked(picture)))
+    .then(picture => dispatch(_onBookmarked(picture)))
     .catch(error => dispatch(_onError(error)));
 }
 
 export function removePictureByIdFromCollection(dispatch, pictureId) {
   dispatch(_started());
   removePictureFromCollection(pictureId)
-    .then(picture => dispatch(_onLiked(picture)))
+    .then(picture => dispatch(_onBookmarked(picture)))
     .catch(error => dispatch(_onError(error)));
 }
 
@@ -81,6 +81,13 @@ function _onSuccess(pictures) {
 function _onLiked(picture) {
   return {
     type: types.PICTURE_LIKED,
+    payload: picture
+  };
+}
+
+function _onBookmarked(picture) {
+  return {
+    type: types.PICTURE_BOOKMARKED,
     payload: picture
   };
 }
