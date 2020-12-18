@@ -37,7 +37,7 @@ export function Card({ picture }) {
       <div className="card-img">
         <img alt="" src={picture.download_url} />
         <LikeButton
-          isLiked={picture.likedBy && picture.likedBy.find(like => like === state.user._id)}
+          isLiked={isLiked}
           onClick={() => { onLike(picture.id); }}
         />
         <span className="likes">Likes : {picture.likedBy ? picture.likedBy.length : 0}</span>
@@ -48,12 +48,13 @@ export function Card({ picture }) {
           Author : {picture.author}
         </h3>
         <div className="card-comments">
-          Comments
-          <ul>
-            <li>
-              Sample comment
-            </li>
-          </ul>
+          {picture.comments.length > 0 && (
+            <ul>
+              {picture.comments.map(({ comment }, index) => (
+                <li key={index}>{comment}</li>
+              ))}
+            </ul>
+          )}
 
           <div>
             <input
