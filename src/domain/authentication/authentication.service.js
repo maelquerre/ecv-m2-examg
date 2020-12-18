@@ -46,8 +46,7 @@ export function logout() {
         throw new Error(message);
       }
       return res;
-    })
-    .then(res => res.json());
+    });
 }
 
 export function getMe() {
