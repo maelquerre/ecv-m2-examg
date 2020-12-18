@@ -54,48 +54,59 @@ export function Card({ picture }) {
   if (!state.user) return null;
   return (
     <div className="card">
+      <div className="card-header">{picture.author}</div>
+
       <div className="card-img">
         <img alt="" src={picture.download_url} />
-        <LikeButton
-          isLiked={isLiked}
-          onClick={() => { onLike(picture.id); }}
-        />
-        <span className="likes">Likes : {picture.likedBy ? picture.likedBy.length : 0}</span>
-        <BookmarkButton
-          isBookmarked={isBookmarked}
-          onClick={() => { onBookmark((picture.id));}}
-        />
       </div>
+
       <div className="card-body">
-        <h3>
-          Author : {picture.author}
-        </h3>
-        <div className="card-comments">
-          {picture.comments.length > 0 && (
+        <div className="card-buttons">
+          <LikeButton
+            isLiked={isLiked}
+            onClick={() => { onLike(picture.id); }}
+          />
+          <BookmarkButton
+            isBookmarked={isBookmarked}
+            onClick={() => { onBookmark((picture.id));}}
+          />
+        </div>
+
+        <div className="card-likes">
+          {picture.likedBy?.length > 0 && `${picture.likedBy.length} ${picture.likedBy.length > 1 ? 'likes' : 'like'}`}
+        </div>
+
+        {picture.comments.length > 0 && (
+          <div className="card-comments">
             <ul>
-              {picture.comments.map(({ comment }, index) => (
-                <li key={index}>{comment}</li>
+              {picture.comments.map(({ by: user, comment }, index) => (
+                <li
+                  key={index}
+                  className="card-comment"
+                >
+                  <span className="card-comment__username">{user.name}</span>&nbsp;{comment}
+                </li>
               ))}
             </ul>
-          )}
-
-          <div>
-            <input
-              name="comment"
-              placeholder="Add a comment..."
-              type="text"
-              value={commentForm.comment}
-              onChange={onChange}
-            />
-            <button
-              onClick={() => { postComment(picture.id); }}
-            >
-              Publish
-            </button>
           </div>
+        )}
+
+        <div className="comment-input">
+          <input
+            name="comment"
+            placeholder="Add a comment..."
+            type="text"
+            value={commentForm.comment}
+            onChange={onChange}
+          />
+
+          <button
+            onClick={() => { postComment(picture.id); }}
+          >
+            Publish
+          </button>
         </div>
       </div>
     </div>
   );
-
 }
