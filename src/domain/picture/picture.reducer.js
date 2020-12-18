@@ -12,7 +12,10 @@ export default function reducer(state, action) {
       return {
         ...state,
         pending: false,
-        pictures: action.payload
+        pictures: [
+          ...state.pictures,
+          ...action.payload
+        ]
       };
 
     case types.PICTURE_LIKED:
@@ -28,12 +31,12 @@ export default function reducer(state, action) {
 
     case types.PICTURE_BOOKMARKED:
       const { user } = state;
-      user.pictures_collection = { ...action.payload.user?.pictures_collection };
+      user.pictures_collection = { ...action.payload.pictures_collection };
 
       return {
         ...state,
         pending: false,
-        user
+        user: { ...user }
       };
 
     case types.PICTURE_FAILED:

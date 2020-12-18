@@ -62,14 +62,14 @@ export function updateCommentPictureById(dispatch, { pictureId, data }) {
 export function addPictureByIdToCollection(dispatch, pictureId) {
   dispatch(_started());
   addPictureToCollection(pictureId)
-    .then(picture => dispatch(_onBookmarked(picture)))
+    .then(user => dispatch(_onBookmarked(user)))
     .catch(error => dispatch(_onError(error)));
 }
 
 export function removePictureByIdFromCollection(dispatch, pictureId) {
   dispatch(_started());
   removePictureFromCollection(pictureId)
-    .then(picture => dispatch(_onBookmarked(picture)))
+    .then(user => dispatch(_onBookmarked(user)))
     .catch(error => dispatch(_onError(error)));
 }
 
@@ -93,10 +93,10 @@ function _onLiked(picture) {
   };
 }
 
-function _onBookmarked(picture) {
+function _onBookmarked(user) {
   return {
     type: types.PICTURE_BOOKMARKED,
-    payload: picture
+    payload: user
   };
 }
 

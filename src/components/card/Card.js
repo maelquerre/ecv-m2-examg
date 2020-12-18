@@ -51,7 +51,7 @@ export function Card({ picture }) {
   };
 
   const onBookmark = (pictureId) => {
-    isLiked ? removePictureByIdFromCollection(dispatch, pictureId) : addPictureByIdToCollection(dispatch, pictureId);
+    isBookmarked ? removePictureByIdFromCollection(dispatch, pictureId) : addPictureByIdToCollection(dispatch, pictureId);
   };
 
   const postOrUpdateComment = (dispatch, data) => {
