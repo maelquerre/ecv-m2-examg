@@ -62,6 +62,7 @@ export function Card({ picture }) {
         />
         <span className="likes">Likes : {picture.likedBy ? picture.likedBy.length : 0}</span>
         <BookmarkButton
+          isBookmarked={isBookmarked}
           onClick={() => { onBookmark((picture.id));}}
         />
       </div>

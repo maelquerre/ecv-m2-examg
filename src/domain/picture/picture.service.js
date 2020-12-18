@@ -33,6 +33,7 @@ export function addPictureToCollection(pictureId) {
       }
       return res;
     })
+    .then(res => res.json());
 }
 
 export function removePictureFromCollection(pictureId) {
@@ -46,6 +47,7 @@ export function removePictureFromCollection(pictureId) {
       }
       return res;
     })
+    .then(res => res.json());
 }
 
 export function likePicture(pictureId) {
