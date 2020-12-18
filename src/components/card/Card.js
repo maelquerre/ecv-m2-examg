@@ -1,24 +1,35 @@
-import { useContext, useMemo } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import { ApplicationContext } from '../../domain/application.store';
-import { likePictureById, unlikePictureById } from '../../domain/picture/picture.actions';
+import { commentPictureById, likePictureById, unlikePictureById } from '../../domain/picture/picture.actions';
 import { LikeButton, BookmarkButton } from '../buttons';
 import './Card.css';
+import { authRegister } from '../../domain/authentication/authentication.actions';
 
 
 export function Card({ picture }) {
   const { state, dispatch } = useContext(ApplicationContext);
+  const [commentForm, setCommentForm] = useState({
+    comment: '',
+  });
 
   const isLiked = useMemo(
     () => picture.likedBy && picture.likedBy.find(like => like === state.user._id),
-    [picture.likedBy]
+    [picture]
   );
+
+  const onChange = (e) => {
+    setCommentForm({
+      comment: e.target.value
+    });
+  };
 
   const onLike = (pictureId) => {
     isLiked ? unlikePictureById(dispatch, pictureId) : likePictureById(dispatch, pictureId);
   };
 
-  console.log(state.user._id);
-  console.log('picture.likedBy:', Boolean(picture.likedBy && picture.likedBy.find(like => like === state.user._id)));
+  const postComment = (pictureId) => {
+    commentPictureById(dispatch, { pictureId, data: commentForm });
+  };
 
   if (!state.user) return null;
   return (
@@ -43,6 +54,20 @@ export function Card({ picture }) {
               Sample comment
             </li>
           </ul>
+
+          <div>
+            <input
+              name="comment"
+              placeholder="Add a comment..."
+              type="text"
+              onChange={onChange}
+            />
+            <button
+              onClick={() => { postComment(picture.id); }}
+            >
+              Publish
+            </button>
+          </div>
         </div>
       </div>
     </div>
