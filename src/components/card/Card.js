@@ -1,6 +1,13 @@
 import { useContext, useMemo, useState } from 'react';
 import { ApplicationContext } from '../../domain/application.store';
-import { commentPictureById, likePictureById, unlikePictureById } from '../../domain/picture/picture.actions';
+
+import {
+  addPictureByIdToCollection,
+  commentPictureById,
+  likePictureById,
+  removePictureByIdFromCollection,
+  unlikePictureById
+} from '../../domain/picture/picture.actions';
 
 import { LikeButton, BookmarkButton } from '../buttons';
 
@@ -34,7 +41,7 @@ export function Card({ picture }) {
   };
 
   const onBookmark = (pictureId) => {
-    isLiked ? unlikePictureById(dispatch, pictureId) : likePictureById(dispatch, pictureId);
+    isLiked ? removePictureByIdFromCollection(dispatch, pictureId) : addPictureByIdToCollection(dispatch, pictureId);
   };
 
   const postComment = (pictureId) => {
@@ -53,7 +60,9 @@ export function Card({ picture }) {
           onClick={() => { onLike(picture.id); }}
         />
         <span className="likes">Likes : {picture.likedBy ? picture.likedBy.length : 0}</span>
-        <BookmarkButton onClick={() => {}} />
+        <BookmarkButton
+          onClick={() => { onBookmark((picture.id));}}
+        />
       </div>
       <div className="card-body">
         <h3>

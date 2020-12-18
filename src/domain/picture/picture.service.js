@@ -35,6 +35,19 @@ export function addPictureToCollection(pictureId) {
     })
 }
 
+export function removePictureFromCollection(pictureId) {
+  return fetch(`/api/collection/${pictureId}`, {
+    method: 'DELETE'
+  })
+    .then(async res => {
+      if (res.status !== 200 && res.status !== 201) {
+        const { message } = await res.json();
+        throw new Error(message);
+      }
+      return res;
+    })
+}
+
 export function likePicture(pictureId) {
   return fetch(`/api/pictures/${pictureId}/like`, {
     method: 'PUT'
