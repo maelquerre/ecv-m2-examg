@@ -3,7 +3,7 @@ import { ApplicationContext } from '../domain/application.store';
 import { fetchPictureById } from '../domain/picture/picture.actions';
 import { CollectionItem } from '../components/collection-item/CollectionItem';
 
-import './Collection.css'
+import './Collection.css';
 
 export default function Collection() {
   const { state, dispatch } = useContext(ApplicationContext);
