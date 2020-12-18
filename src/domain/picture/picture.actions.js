@@ -37,6 +37,7 @@ export function unlikePictureById(dispatch, pictureId) {
 }
 
 export function commentPictureById(dispatch, { pictureId, data }) {
+  console.log('data:', data);
   dispatch(_started());
   commentPicture(pictureId, data)
     .then(picture => dispatch(_onLiked(picture)))
