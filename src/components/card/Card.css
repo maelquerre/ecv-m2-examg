@@ -62,13 +62,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: .5rem;
+  background-color: #eee;
   margin-top: 1rem;
+  border-radius: .25rem;
 }
 
 .comment-input input {
   flex-grow: 1;
   margin: 0;
   border: 0;
+  background-color: transparent;
 }
 
 .comment-input input:focus {

@@ -21,13 +21,17 @@ export function Card({ picture }) {
   const [commentForm, setCommentForm] = useState(initialCommentForm);
 
   const isLiked = useMemo(
-    () => picture.likedBy && picture.likedBy.find(({ _id }) => _id === state.user._id),
+    () => picture.likedBy?.find(({ _id }) => _id === state.user._id),
     [picture]
   );
 
-  // TODO: Update this to return the accurate value
   const isBookmarked = useMemo(
-    () => state.user.pictures_collection && state.user.pictures_collection.find(({ picsum_id }) => picsum_id === picture.picsum_id),
+    () => state.user?.pictures_collection?.find(({ picsum_id }) => picsum_id === picture.picsum_id),
+    [picture]
+  );
+
+  const userComment = useMemo(
+    () => picture.comments?.find(({ by }) => by._id === state.user._id),
     [picture]
   );
 
@@ -104,7 +108,7 @@ export function Card({ picture }) {
           <button
             onClick={() => { postComment(picture.id); }}
           >
-            Publish
+            {userComment ? 'Update comment' : 'Publish'}
           </button>
         </div>
       </div>
