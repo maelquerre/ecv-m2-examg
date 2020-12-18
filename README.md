@@ -45,17 +45,17 @@ API URL : `https://examg-api.herokuapp.com/`
 
 __Bugs should be solved :__
 
-* All requests are not working, maybe URL error ?
-* Like isn't working (when i like a post I don't see that is liked I need to refresh the browser)
-* I cannot access to the page : my collection
+[x] All requests are not working, maybe URL error ?
+[x] Like isn't working (when i like a post I don't see that is liked I need to refresh the browser)
+[x] I cannot access to the page : my collection
 
 __Features needed :__
 
-* add logout function
-* add unlike post
-* add a comment to a picture
-* add pagination to images list
-* add an image to my collection
-* remove an image from my collection
-* search/filter images from my collection by author name
-* add some test of reducers and components
+[x] add logout function
+[x] add unlike post
+[x] add a comment to a picture
+[ ] add pagination to images list
+[ ] add an image to my collection
+[ ] remove an image from my collection
+[ ] search/filter images from my collection by author name
+[ ] add some test of reducers and components

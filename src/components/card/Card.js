@@ -21,6 +21,8 @@ export function Card({ picture }) {
 
   const [commentForm, setCommentForm] = useState(initialCommentForm);
 
+  // Computed data
+
   const isLiked = useMemo(
     () => picture.likedBy?.find(({ _id }) => _id === state.user._id),
     [picture]
@@ -35,6 +37,8 @@ export function Card({ picture }) {
     () => picture.comments?.find(({ by }) => by._id === state.user._id),
     [picture]
   );
+
+  // Methods
 
   const onChange = (e) => {
     setCommentForm({
@@ -51,8 +55,8 @@ export function Card({ picture }) {
   };
 
   const postOrUpdateComment = (dispatch, data) => {
-    return userComment ? updateCommentPictureById(dispatch, data) : postCommentPictureById(dispatch, data)
-  }
+    return userComment ? updateCommentPictureById(dispatch, data) : postCommentPictureById(dispatch, data);
+  };
 
   const onComment = (pictureId) => {
     commentForm.comment.length > 0 &&
@@ -61,6 +65,8 @@ export function Card({ picture }) {
         setCommentForm(initialCommentForm);
       });
   };
+
+  // View
 
   if (!state.user) return null;
   return (
