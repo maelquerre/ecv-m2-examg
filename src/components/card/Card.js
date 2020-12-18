@@ -46,9 +46,10 @@ export function Card({ picture }) {
   };
 
   const postComment = (pictureId) => {
-    commentPictureById(dispatch, { pictureId, data: commentForm }).then(() => {
-      setCommentForm(initialCommentForm);
-    });
+    commentForm.comment.length > 0 && commentPictureById(dispatch, { pictureId, data: commentForm })
+      .then(() => {
+        setCommentForm(initialCommentForm);
+      });
   };
 
   if (!state.user) return null;
