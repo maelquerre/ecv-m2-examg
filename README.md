@@ -55,7 +55,7 @@ __Features needed :__
 - [x] add unlike post
 - [x] add a comment to a picture
 - [ ] add pagination to images list
-- [ ] add an image to my collection
-- [ ] remove an image from my collection
+- [x] add an image to my collection
+- [x] remove an image from my collection
 - [ ] search/filter images from my collection by author name
 - [ ] add some test of reducers and components
