@@ -7,6 +7,7 @@ import './Collection.css';
 
 export default function Collection() {
   const { state, dispatch } = useContext(ApplicationContext);
+
   const [picturesCollection, setPicturesCollection] = useState([]);
 
   useEffect(() => {

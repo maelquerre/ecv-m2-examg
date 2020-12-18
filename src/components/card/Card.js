@@ -21,7 +21,7 @@ export function Card({ picture }) {
 
   const [commentForm, setCommentForm] = useState(initialCommentForm);
 
-  // Computed data
+  // Computed values
 
   const isLiked = useMemo(
     () => picture.likedBy?.find(({ _id }) => _id === state.user._id),
@@ -30,7 +30,7 @@ export function Card({ picture }) {
 
   const isBookmarked = useMemo(
     () => state.user?.pictures_collection?.find(({ picsum_id }) => picsum_id === picture.picsum_id),
-    [picture]
+    [state.user]
   );
 
   const userComment = useMemo(
@@ -85,7 +85,7 @@ export function Card({ picture }) {
           />
           <BookmarkButton
             isBookmarked={isBookmarked}
-            onClick={() => { onBookmark((picture.id));}}
+            onClick={() => { onBookmark((picture.id)); }}
           />
         </div>
 
