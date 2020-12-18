@@ -3,10 +3,11 @@ import { ApplicationContext } from '../../domain/application.store';
 
 import {
   addPictureByIdToCollection,
-  commentPictureById,
+  postCommentPictureById,
   likePictureById,
   removePictureByIdFromCollection,
-  unlikePictureById
+  unlikePictureById,
+  updateCommentPictureById
 } from '../../domain/picture/picture.actions';
 
 import { LikeButton, BookmarkButton } from '../buttons';
@@ -49,8 +50,13 @@ export function Card({ picture }) {
     isLiked ? removePictureByIdFromCollection(dispatch, pictureId) : addPictureByIdToCollection(dispatch, pictureId);
   };
 
-  const postComment = (pictureId) => {
-    commentForm.comment.length > 0 && commentPictureById(dispatch, { pictureId, data: commentForm })
+  const postOrUpdateComment = (dispatch, data) => {
+    return userComment ? updateCommentPictureById(dispatch, data) : postCommentPictureById(dispatch, data)
+  }
+
+  const onComment = (pictureId) => {
+    commentForm.comment.length > 0 &&
+    postOrUpdateComment(dispatch, { pictureId, data: commentForm })
       .then(() => {
         setCommentForm(initialCommentForm);
       });
@@ -106,7 +112,7 @@ export function Card({ picture }) {
           />
 
           <button
-            onClick={() => { postComment(picture.id); }}
+            onClick={() => { onComment(picture.id); }}
           >
             {userComment ? 'Update comment' : 'Publish'}
           </button>

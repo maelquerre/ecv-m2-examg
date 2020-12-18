@@ -88,3 +88,7 @@
   box-shadow: none;
   cursor: pointer;
 }
+
+.comment-input button:focus {
+  outline: none;
+}

@@ -1,11 +1,12 @@
 import {
   addPictureToCollection,
-  commentPicture,
+  postCommentPicture,
   getPictures,
   getPictureById,
   likePicture,
   removePictureFromCollection,
-  unlikePicture
+  unlikePicture,
+  updateCommentPicture
 } from './picture.service';
 
 export const types = {
@@ -44,9 +45,16 @@ export function unlikePictureById(dispatch, pictureId) {
     .catch(error => dispatch(_onError(error)));
 }
 
-export function commentPictureById(dispatch, { pictureId, data }) {
+export function postCommentPictureById(dispatch, { pictureId, data }) {
   dispatch(_started());
-  return commentPicture(pictureId, data)
+  return postCommentPicture(pictureId, data)
+    .then(picture => dispatch(_onLiked(picture)))
+    .catch(error => dispatch(_onError(error)));
+}
+
+export function updateCommentPictureById(dispatch, { pictureId, data }) {
+  dispatch(_started());
+  return updateCommentPicture(pictureId, data)
     .then(picture => dispatch(_onLiked(picture)))
     .catch(error => dispatch(_onError(error)));
 }

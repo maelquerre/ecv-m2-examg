@@ -22,34 +22,6 @@ export function getPictureById(pictureId) {
     .then(res => res.json());
 }
 
-export function addPictureToCollection(pictureId) {
-  return fetch(`/api/collection/${pictureId}`, {
-    method: 'POST'
-  })
-    .then(async res => {
-      if (res.status !== 200 && res.status !== 201) {
-        const { message } = await res.json();
-        throw new Error(message);
-      }
-      return res;
-    })
-    .then(res => res.json());
-}
-
-export function removePictureFromCollection(pictureId) {
-  return fetch(`/api/collection/${pictureId}`, {
-    method: 'DELETE'
-  })
-    .then(async res => {
-      if (res.status !== 200 && res.status !== 201) {
-        const { message } = await res.json();
-        throw new Error(message);
-      }
-      return res;
-    })
-    .then(res => res.json());
-}
-
 export function likePicture(pictureId) {
   return fetch(`/api/pictures/${pictureId}/like`, {
     method: 'PUT'
@@ -78,13 +50,60 @@ export function unlikePicture(pictureId) {
     .then(res => res.json());
 }
 
-export function commentPicture(pictureId, data) {
+export function postCommentPicture(pictureId, data) {
   return fetch(`/api/pictures/comment/${pictureId}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(data)
+  })
+    .then(async res => {
+      if (res.status !== 200 && res.status !== 201) {
+        const { message } = await res.json();
+        throw new Error(message);
+      }
+      return res;
+    })
+    .then(res => res.json());
+}
+
+export function updateCommentPicture(pictureId, data) {
+  return fetch(`/api/pictures/comment/${pictureId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+    .then(async res => {
+      if (res.status !== 200 && res.status !== 201) {
+        const { message } = await res.json();
+        throw new Error(message);
+      }
+      return res;
+    })
+    .then(res => res.json());
+}
+
+
+export function addPictureToCollection(pictureId) {
+  return fetch(`/api/collection/${pictureId}`, {
+    method: 'POST'
+  })
+    .then(async res => {
+      if (res.status !== 200 && res.status !== 201) {
+        const { message } = await res.json();
+        throw new Error(message);
+      }
+      return res;
+    })
+    .then(res => res.json());
+}
+
+export function removePictureFromCollection(pictureId) {
+  return fetch(`/api/collection/${pictureId}`, {
+    method: 'DELETE'
   })
     .then(async res => {
       if (res.status !== 200 && res.status !== 201) {
