@@ -1,19 +1,25 @@
 import { useContext, useMemo, useState } from 'react';
 import { ApplicationContext } from '../../domain/application.store';
 import { commentPictureById, likePictureById, unlikePictureById } from '../../domain/picture/picture.actions';
-import { LikeButton, BookmarkButton } from '../buttons';
-import './Card.css';
-import { authRegister } from '../../domain/authentication/authentication.actions';
 
+import { LikeButton, BookmarkButton } from '../buttons';
+
+import './Card.css';
+
+const initialCommentForm = { comment: '' };
 
 export function Card({ picture }) {
   const { state, dispatch } = useContext(ApplicationContext);
-  const [commentForm, setCommentForm] = useState({
-    comment: '',
-  });
+
+  const [commentForm, setCommentForm] = useState(initialCommentForm);
 
   const isLiked = useMemo(
-    () => picture.likedBy && picture.likedBy.find(like => like === state.user._id),
+    () => picture.likedBy && picture.likedBy.find(({ _id }) => _id === state.user._id),
+    [picture]
+  );
+
+  const isBookmarked = useMemo(
+    () => picture.likedBy && picture.likedBy.find(({ _id }) => _id === state.user._id),
     [picture]
   );
 
@@ -27,8 +33,14 @@ export function Card({ picture }) {
     isLiked ? unlikePictureById(dispatch, pictureId) : likePictureById(dispatch, pictureId);
   };
 
+  const onBookmark = (pictureId) => {
+    isLiked ? unlikePictureById(dispatch, pictureId) : likePictureById(dispatch, pictureId);
+  };
+
   const postComment = (pictureId) => {
-    commentPictureById(dispatch, { pictureId, data: commentForm });
+    commentPictureById(dispatch, { pictureId, data: commentForm }).then(() => {
+      setCommentForm(initialCommentForm);
+    });
   };
 
   if (!state.user) return null;
@@ -61,6 +73,7 @@ export function Card({ picture }) {
               name="comment"
               placeholder="Add a comment..."
               type="text"
+              value={commentForm.comment}
               onChange={onChange}
             />
             <button
