@@ -15,7 +15,7 @@ Launches the test runner in the interactive watch mode.
 
 ## Description
 
-This app allows user to display an existing list of images, you can save an image to your images collection, you can like/unlike an image and comment an image from the global list.
+This app allows a user to display an existing list of images, you can save an image to your images collection, you can like/unlike an image and comment an image from the global list.
 
 API URL : `https://examg-api.herokuapp.com/`
 
@@ -41,15 +41,15 @@ API URL : `https://examg-api.herokuapp.com/`
 
 
 
-## What I need to do
+## What needs to be done
 
-__Bugs should be solved :__
+__Bugs that should be solved:__
 
 - [x] All requests are not working, maybe URL error ?
 - [x] Like isn't working (when i like a post I don't see that is liked I need to refresh the browser)
 - [x] I cannot access to the page : my collection
 
-__Features needed :__
+__Features needed:__
 
 - [x] add logout function
 - [x] add unlike post
