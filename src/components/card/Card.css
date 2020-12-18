@@ -80,6 +80,7 @@
 }
 
 .comment-input button {
+  flex-shrink: 0;
   padding: 0;
   color: #1f3254;
   font-weight: 600;
@@ -87,6 +88,7 @@
   background-color: transparent;
   box-shadow: none;
   cursor: pointer;
+  text-align: right;
 }
 
 .comment-input button:focus {
