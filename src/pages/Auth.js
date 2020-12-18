@@ -42,7 +42,7 @@ export default function Login() {
                         <input name="email" type="email" placeholder="Email" onChange={onChange} />
                         <input name="password" type="password" placeholder="Password" onChange={onChange} />
                         <button onClick={register}>Register</button>
-                        <p>Do have an account ?</p>
+                        <p>Have an account?</p>
                         <p className="no-margin-top"><span className="link" onClick={() => setDisplayRegisterForm(!displayRegisterFrom)}>Login</span></p>
                     </>
                     :
@@ -50,7 +50,7 @@ export default function Login() {
                         <input name="email" type="email" placeholder="Email" onChange={onChange} />
                         <input name="password" type="password" placeholder="Password" onChange={onChange} />
                         <button onClick={login}>Connexion</button>
-                        <p>Don't have an account ?</p>
+                        <p>Don't have an account?</p>
                         <p className="no-margin-top"><span className="link" onClick={() => setDisplayRegisterForm(!displayRegisterFrom)}>Create your account</span></p>
                     </>
                 }

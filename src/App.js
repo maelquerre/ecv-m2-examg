@@ -1,8 +1,11 @@
 import { useContext, useEffect } from 'react';
 import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
 import { Menu } from './components/menu/Menu';
+
 import Auth from './pages/Auth';
+import Collection from './pages/Collection';
 import Home from './pages/Home';
+
 import { ApplicationContext, ApplicationProvider } from './domain/application.store';
 import { authGetMe } from './domain/authentication/authentication.actions';
 
@@ -18,22 +21,21 @@ const Wrapper = ({ component: Component, ...props }) => {
     } catch (error) {
       history.push('/login');
     }
-  }, [])
-  return <Component {...props} />
-}
+  }, []);
+  return <Component {...props} />;
+};
 
 const ProtectedRoute = ({ component, ...rest }) => {
   const { state } = useContext(ApplicationContext);
   return (
     <Route {...rest} render={props => {
       if (state.isLoggedIn) {
-        return <Wrapper {...props} component={component} />
+        return <Wrapper {...props} component={component} />;
       }
-      return <Redirect to="/login" />
+      return <Redirect to="/login" />;
     }} />
-  )
-}
-
+  );
+};
 
 function App() {
   return (
@@ -42,11 +44,12 @@ function App() {
         <Switch>
           <Route path='/login' component={Auth} />
           <ProtectedRoute exact path='/' component={Home} />
+          <ProtectedRoute exact path='/profile' component={Collection} />
           <Redirect to="/" />
         </Switch>
         <Menu />
-      </div >
-    </ApplicationProvider >
+      </div>
+    </ApplicationProvider>
   );
 }
 
