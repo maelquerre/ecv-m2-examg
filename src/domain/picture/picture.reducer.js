@@ -12,10 +12,7 @@ export default function reducer(state, action) {
       return {
         ...state,
         pending: false,
-        pictures: [
-          ...state.pictures,
-          ...action.payload
-        ]
+        pictures: action.payload
       };
 
     case types.PICTURE_LIKED:
